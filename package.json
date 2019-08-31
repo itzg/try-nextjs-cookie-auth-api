@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "node server.js",
+    "dev-auth": "node server-auth.js",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js"
   },
@@ -14,7 +15,8 @@
     "express": "^4.17.1",
     "next": "^9.0.5",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "cross-env": "^5.2.0"
