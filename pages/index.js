@@ -1,10 +1,14 @@
 import cookies from 'next-cookies';
 import Links from '../components/Links';
 
-function Home({ code }) {
+function Home({code, loggedIn}) {
 
   function login() {
     window.location = '/login';
+  }
+
+  function logout() {
+    window.location = '/logout';
   }
 
   return (
@@ -12,11 +16,16 @@ function Home({ code }) {
 
         <h1>Home</h1>
 
-        { code && <div>Your code is {code}</div>}
-
-        <div>
-          <button onClick={login}>Login</button>
-        </div>
+        {loggedIn ?
+            <div>
+              <div>Your code is {code}</div>
+              <button onClick={logout}>Logout</button>
+            </div>
+            :
+            <div>
+              <button onClick={login}>Login</button>
+            </div>
+        }
 
         <Links/>
       </div>
@@ -26,7 +35,8 @@ function Home({ code }) {
 Home.getInitialProps = async (ctx) => {
   const {code} = cookies(ctx);
   return {
-    code
+    code,
+    loggedIn: !!code
   }
 };
 

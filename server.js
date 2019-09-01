@@ -15,6 +15,12 @@ app.prepare().then(() => {
     res.redirect(`${authenticateUri}?redirect_uri=http://localhost:${port}/callback`)
   });
 
+  server.get('/logout', (req, res) => {
+    console.log('Handling logout');
+    res.clearCookie('code');
+    res.redirect('/');
+  });
+
   server.get('/callback', (req, res) => {
     const code = req.query.code;
     console.log(`Handling authenticate callback, got code ${code}`);
