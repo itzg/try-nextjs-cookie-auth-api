@@ -1,4 +1,7 @@
-function Home() {
+import cookies from 'next-cookies';
+import Links from '../components/Links';
+
+function Home({ code }) {
 
   function login() {
     window.location = '/login';
@@ -7,13 +10,24 @@ function Home() {
   return (
       <div>
 
-        Welcome to Next.js!
+        <h1>Home</h1>
+
+        { code && <div>Your code is {code}</div>}
 
         <div>
           <button onClick={login}>Login</button>
         </div>
+
+        <Links/>
       </div>
   )
 }
+
+Home.getInitialProps = async (ctx) => {
+  const {code} = cookies(ctx);
+  return {
+    code
+  }
+};
 
 export default Home
