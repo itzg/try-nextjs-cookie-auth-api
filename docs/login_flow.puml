@@ -1,0 +1,15 @@
+@startuml
+
+actor User
+
+User -> Browser : clicks login
+Browser -> App : GET /login
+App -> Browser : redirect http://localhost:3001/authenticate
+Browser -> Auth : GET /authenticate
+User -> Browser : authorizes
+Browser -> Auth : POST /authenticate
+Auth -> Browser : redirect http://localhost:3000/callback
+Browser -> App : GET /callback
+App -> Browser : set 'code' cookie\nredirect /
+
+@enduml
